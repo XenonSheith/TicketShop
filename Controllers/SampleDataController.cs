@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using TicketShop.Code;
 
 namespace TicketShop.Controllers
 {
@@ -17,12 +18,19 @@ namespace TicketShop.Controllers
         [HttpGet("[action]")]
         public IEnumerable<WeatherForecast> WeatherForecasts()
         {
+            var data = new BloggingContext();
+            
+            data.Test.Add(new Test(){ Title = "hello "+  DateTime.Now.ToShortDateString()});
+            data.SaveChanges();
+
+            
+
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 DateFormatted = DateTime.Now.AddDays(index).ToString("d"),
                 TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)] + "salam"
+                Summary = Summaries[rng.Next(Summaries.Length)] + data.Test.Count().ToString()
             });
         }
 
