@@ -10,6 +10,22 @@
                 "${workspaceFolder}/TicketShop.csproj"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "dotnetrun",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "run"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+      
+        {
+            "type": "npm",
+            "script": "start",
+            "path": "ClientApp/",
+            "problemMatcher": []
         }
     ]
 }
