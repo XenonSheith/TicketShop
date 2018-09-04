@@ -59,18 +59,11 @@ namespace TicketShop
                 // see https://go.microsoft.com/fwlink/?linkid=864501
 
                 spa.Options.SourcePath = "ClientApp";
-                spa.UseSpaPrerendering(options =>
-                  {
-                      options.BootModulePath = $"{spa.Options.SourcePath}/dist-server/main.bundle.js";
-                      options.BootModuleBuilder = env.IsDevelopment()
-                          ? new AngularCliBuilder(npmScript: "build:ssr")
-                          : null;
-                      options.ExcludeUrls = new[] { "/sockjs-node" };
-                  });
+
                 if (env.IsDevelopment())
                 {
-                    spa.UseAngularCliServer(npmScript: "start");
-                    //spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+                   // spa.UseAngularCliServer(npmScript: "start");
+                   spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                 }
             });
         }

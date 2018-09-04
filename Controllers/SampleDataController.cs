@@ -12,25 +12,21 @@ namespace TicketShop.Controllers
     {
         private static string[] Summaries = new[]
         {
-           "ghol355i2", "Freezing32", "Brac3ing2", "Chilly2", "Cool", "Mil2d", "War2m", "Balmy", "Hot", "Sweltering", "Scorching"
+            "Free2zing", "Bra2cing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
         [HttpGet("[action]")]
         public IEnumerable<WeatherForecast> WeatherForecasts()
         {
-            var data = new BloggingContext();
-            
-            data.Test.Add(new Test(){ Title = "hello "+  DateTime.Now.ToShortDateString()});
-            data.SaveChanges();
-
-            
-
+            var cntx = new BloggingContext();
+            cntx.Test.Add(new Test(){ Code = "hel "+ DateTime.Now.Millisecond.ToString() , Title = "title " + DateTime.Now.Ticks});
+            cntx.SaveChanges();
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 DateFormatted = DateTime.Now.AddDays(index).ToString("d"),
                 TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)] + data.Test.Count().ToString()
+                Summary = Summaries[rng.Next(Summaries.Length)] + cntx.Test.Count()
             });
         }
 

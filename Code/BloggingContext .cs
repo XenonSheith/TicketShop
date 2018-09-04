@@ -8,6 +8,7 @@ namespace TicketShop.Code
         public BloggingContext()
         {
             Database.AutoTransactionsEnabled = true;
+            Database.EnsureCreated();
         }
         public DbSet<Test> Test { get; set; }
 
